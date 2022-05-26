@@ -9,5 +9,6 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public string? ProfileImageFileName { get; set; }
+        public string ModifiedUserName { get; set; }
     }
 }
