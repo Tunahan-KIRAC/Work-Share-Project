@@ -17,7 +17,8 @@ namespace DataAccessLayer.Repository
 
         public async Task<User> GetWitWorkByIdAsync(int usrId)
         {
-            return (await _db.Users.Include(u => u.Works).FirstOrDefaultAsync(c => c.Id == usrId))!;
+            var oid = _db.Works.FirstOrDefault(w => w.Id == usrId)!.OwnerId;
+            return (await _db.Users.Include(u => u.Works).FirstOrDefaultAsync(x=>x.Id==oid))!;
         }
 
         public async Task<User> GetWitCommentByIdAsync(int usrId)
