@@ -18,6 +18,7 @@ namespace CoreLayer.Models
         public bool IsDelete { get; set; } = false;
         public bool IsAdmin { get; set; }=false;
         public string? ProfileImageFileName { get; set; }
+        public int Score { get; set; }
 
 
         public DateTime? CreatedOn { get; set; }

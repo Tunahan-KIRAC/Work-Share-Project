@@ -23,7 +23,8 @@ namespace DataAccessLayer.Repository
 
         public async Task<User> GetWitCommentByIdAsync(int usrId)
         {
-            return (await _db.Users.Include(u => u.Comments).FirstOrDefaultAsync(c => c.Id == usrId))!;
+            var oid = _db.Comments.FirstOrDefault(w => w.Id == usrId)!.OwnerId;
+            return (await _db.Users.Include(u => u.Comments).FirstOrDefaultAsync(c => c.Id == oid))!;
         }
     }
 }

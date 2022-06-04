@@ -10,5 +10,6 @@
         public string Password { get; set; }
         public string? ProfileImageFileName { get; set; }
         public string ModifiedUserName { get; set; }
+        public int Score { get; set; }
     }
 }

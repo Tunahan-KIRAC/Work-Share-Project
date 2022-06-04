@@ -32,7 +32,8 @@ namespace DataAccessLayer.Repository
 
         public async Task<IEnumerable<Work>> GetWitCommentByIdAsync(int wrkId)
         {
-            var res = await _db.Works.Include(w => w.Comments).Where(c => c.Id == wrkId).ToListAsync();
+            var woid = _db.Comments.FirstOrDefault(w => w.Id == wrkId)!.WorkId;
+            var res = await _db.Works.Include(w => w.Comments).Where(c => c.Id == woid).ToListAsync();
             return (res);
 
         }

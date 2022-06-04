@@ -17,7 +17,8 @@ namespace DataAccessLayer.Repository
 
         public async Task<Category> GetWithWorkByIdAsync(int catId)
         {
-            return (await _db.Categories.Include(s => s.Works).FirstOrDefaultAsync(s => s.Id == catId))!;
+            var woid = _db.Works.FirstOrDefault(w => w.Id == catId)!.CategoryId;
+            return (await _db.Categories.Include(s => s.Works).FirstOrDefaultAsync(s => s.Id == woid))!;
         }
 
         
