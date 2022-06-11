@@ -70,6 +70,25 @@ namespace API.Controllers
         {
             var usr = await _userService.GetWitCommentByIdAsync(id);
             return Ok(_mapper.Map<UserGetWithCommentById>(usr));
-        }        
+        }
+
+        [HttpPost("/Login")]
+        public async Task<IActionResult> Login(LoginDto LgnUsr)
+        {
+            var user = await _userService.FirstOrDefaultAsync(x => x.Email == LgnUsr.Email);
+            if (user.Email != null && user.Password == LgnUsr.Password)
+            {
+                return Ok(_mapper.Map<UserDto>(user));
+            }
+
+            return BadRequest("Şİfre veye mail hatalı");
+        }
+
+        [HttpPost("/Register")]
+        public async Task<IActionResult> Register(RegisterDto registerDto)
+        {
+            var user = await _userService.AddAsync(_mapper.Map<User>(registerDto));
+            return Created(string.Empty, registerDto);
+        }
     }
 }

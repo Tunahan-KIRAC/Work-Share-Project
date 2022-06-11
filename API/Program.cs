@@ -9,6 +9,12 @@ using ServiceLayer.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+
+
+
+
 // Add services to the container.
 
 builder.Services.AddAutoMapper(typeof(Program));
@@ -19,6 +25,8 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IWorkService, WorkService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 
 
@@ -35,7 +43,15 @@ builder.Services.AddDbContext<FeleketDbContext>(options =>
 });
 
 
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        builderer =>
+        {
+            builderer.WithOrigins("http://localhost:3000");
+        });
+});
 
 
 builder.Services.AddControllers();
@@ -45,6 +61,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -52,7 +70,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

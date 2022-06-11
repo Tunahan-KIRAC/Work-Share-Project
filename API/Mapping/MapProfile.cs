@@ -48,6 +48,12 @@ namespace API.Mapping
             CreateMap<Work, WorkGetAllWithCategory>();
             CreateMap<WorkGetAllWithCategory, Work>();
 
+            CreateMap<User, LoginDto>();
+            CreateMap<LoginDto, User>();
+
+            CreateMap<User, RegisterDto>();
+            CreateMap<RegisterDto, User>();
+
 
 
         }
