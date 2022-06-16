@@ -72,7 +72,7 @@ namespace API.Controllers
             return Ok(_mapper.Map<UserGetWithCommentById>(usr));
         }
 
-        [HttpPost("/Login")]
+        [HttpPost("/api/Login")]
         public async Task<IActionResult> Login(LoginDto LgnUsr)
         {
             var user = await _userService.FirstOrDefaultAsync(x => x.Email == LgnUsr.Email);
